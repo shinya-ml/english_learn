@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Buttons from '../components/Buttons';
 import WordList from '../components/WordList';
@@ -6,14 +7,16 @@ import Footer from '../components/Footer';
 
 class TopPage extends Component {
   render() {
+    console.log(this.props.word);
+    const { word } = this.props;
     return (
       <div>
         <Header />
         <Buttons />
-        <WordList />
+        <WordList word={word} />
         <Footer />
       </div>
     );
   }
 }
-export default TopPage;
+export default connect((state) => state, null)(TopPage);
