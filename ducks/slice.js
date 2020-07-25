@@ -26,9 +26,9 @@ const wordSlice = createSlice({
   initialState,
   reducers: {
     addWord: (state, action) => ({
-      ...state,
-      wordList: [...wordList, action.payload],
+      wordList: [...state.wordList, action.payload],
     }),
   },
 });
+export const { addWord } = wordSlice.actions;
 export default wordSlice;
