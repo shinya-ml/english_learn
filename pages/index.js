@@ -7,7 +7,6 @@ import Footer from '../components/Footer';
 
 class TopPage extends Component {
   render() {
-    console.log(this.props.word);
     const { word } = this.props;
     return (
       <div>
