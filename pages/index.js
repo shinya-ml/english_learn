@@ -8,12 +8,11 @@ import Footer from '../components/Footer';
 
 class TopPage extends Component {
   render() {
-    const { word } = this.props;
     return (
       <div>
         <Header />
         <Buttons />
-        <WordList word={word} />
+        <WordList />
         <WordForm />
         <Footer />
       </div>

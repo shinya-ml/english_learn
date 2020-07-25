@@ -40,8 +40,16 @@ class WordForm extends Component {
   render() {
     return (
       <div>
-        <input onChange={this.onChangeEnWord} value={this.state.enWord} />
-        <input onChange={this.onChangeJaWord} value={this.state.jaWord} />
+        <input
+          onChange={this.onChangeEnWord}
+          value={this.state.enWord}
+          placeholder="english word"
+        />
+        <input
+          onChange={this.onChangeJaWord}
+          value={this.state.jaWord}
+          placeholder="japanese word"
+        />
         <button onClick={this.onClick}>Add word</button>
       </div>
     );

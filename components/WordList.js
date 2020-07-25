@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { deleteWord } from '../ducks/slice';
 
 class WordList extends Component {
+  constructor(props) {
+    super(props);
+    this.onClick = this.onClick.bind(this);
+  }
+  onClick(index) {
+    console.log(index);
+    console.log(this.props);
+    this.props.deleteWord(index);
+  }
   render() {
     return (
       <div>
@@ -17,6 +28,9 @@ class WordList extends Component {
               <tr key={index}>
                 <td>{word.word}</td>
                 <td>{word.ja}</td>
+                <td>
+                  <button onClick={() => this.onClick(index)}>delete</button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -25,4 +39,5 @@ class WordList extends Component {
     );
   }
 }
-export default WordList;
+const mapDispatchToProps = { deleteWord };
+export default connect((state) => state, mapDispatchToProps)(WordList);

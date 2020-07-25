@@ -28,7 +28,14 @@ const wordSlice = createSlice({
     addWord: (state, action) => ({
       wordList: [...state.wordList, action.payload],
     }),
+    deleteWord: (state, action) => ({
+      wordList: [
+        ...state.wordList.slice(0, action.payload),
+        ...state.wordList.slice(action.payload + 1, state.wordList.length),
+      ],
+      // wordList: state.wordList.splice(action.payload, 1),
+    }),
   },
 });
-export const { addWord } = wordSlice.actions;
+export const { addWord, deleteWord } = wordSlice.actions;
 export default wordSlice;
