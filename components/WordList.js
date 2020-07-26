@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { deleteWord } from '../ducks/slice';
+import Link from 'next/link';
 
 class WordList extends Component {
   constructor(props) {
@@ -30,6 +31,11 @@ class WordList extends Component {
                 <td>{word.ja}</td>
                 <td>
                   <button onClick={() => this.onClick(index)}>delete</button>
+                </td>
+                <td>
+                  <Link href={{ pathname: '/edit', query: { index: index } }}>
+                    <button>edit</button>
+                  </Link>
                 </td>
               </tr>
             ))}

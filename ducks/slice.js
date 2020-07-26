@@ -33,7 +33,16 @@ const wordSlice = createSlice({
         ...state.wordList.slice(0, action.payload),
         ...state.wordList.slice(action.payload + 1, state.wordList.length),
       ],
-      // wordList: state.wordList.splice(action.payload, 1),
+    }),
+    editWord: (state, action) => ({
+      wordList: [
+        ...state.wordList.slice(0, action.payload.index),
+        action.payload.newWord,
+        ...state.wordList.slice(
+          action.payload.index + 1,
+          state.wordList.length
+        ),
+      ],
     }),
   },
 });
