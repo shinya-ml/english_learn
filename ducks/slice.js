@@ -46,5 +46,5 @@ const wordSlice = createSlice({
     }),
   },
 });
-export const { addWord, deleteWord } = wordSlice.actions;
+export const { addWord, deleteWord, editWord } = wordSlice.actions;
 export default wordSlice;
