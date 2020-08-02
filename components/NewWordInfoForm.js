@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { editWord } from '../ducks/slice';

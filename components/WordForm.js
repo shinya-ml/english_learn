@@ -1,59 +1,32 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { addWord } from '../ducks/slice';
 
-class WordForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      enWord: '',
-      jaWord: '',
-    };
-    this.onChangeEnWord = this.onChangeEnWord.bind(this);
-    this.onChangeJaWord = this.onChangeJaWord.bind(this);
-    this.onClick = this.onClick.bind(this);
-  }
+export const WordForm = () => {
+  const dispatch = useDispatch();
 
-  onChangeEnWord(e) {
-    this.setState({
-      enWord: e.target.value,
-    });
-  }
-  onChangeJaWord(e) {
-    this.setState({
-      jaWord: e.target.value,
-    });
-  }
+  const [enWord, setEnWord] = useState('');
+  const [jaWord, setJaWord] = useState('');
 
-  onClick() {
-    const newWord = {
-      word: this.state.enWord,
-      ja: this.state.jaWord,
-    };
-    this.props.addWord(newWord);
-    this.setState({
-      enWord: '',
-      jaWord: '',
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        <input
-          onChange={this.onChangeEnWord}
-          value={this.state.enWord}
-          placeholder="english word"
-        />
-        <input
-          onChange={this.onChangeJaWord}
-          value={this.state.jaWord}
-          placeholder="japanese word"
-        />
-        <button onClick={this.onClick}>Add word</button>
-      </div>
-    );
-  }
-}
-const mapDispatchToProps = { addWord };
-export default connect((state) => state, mapDispatchToProps)(WordForm);
+  const onClick = () => {
+    dispatch(addWord({ word: enWord, ja: jaWord }));
+    setEnWord('');
+    setJaWord('');
+  };
+  return (
+    <div>
+      <input
+        onChange={(e) => setEnWord(e.target.value)}
+        value={enWord}
+        placeholder="english word"
+      />
+      <input
+        onChange={(e) => setJaWord(e.target.value)}
+        value={jaWord}
+        placeholder="japanese word"
+      />
+      <button onClick={onClick}>Add word</button>
+    </div>
+  );
+};
