@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteWord } from '../ducks/slice';
-import NewWordInfoForm from './NewWordInfoForm';
+import { NewWordInfoForm } from './NewWordInfoForm';
 
 export const WordList = () => {
   const wordList = useSelector((state) => state.word.wordList);
-  console.log(wordList);
   const dispatch = useDispatch();
   return (
     <div>
