@@ -1,64 +1,41 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { editWord } from '../ducks/slice';
 
-class NewWordInfoForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      english: '',
-      japanese: '',
-    };
-    this.onChangeEnglish = this.onChangeEnglish.bind(this);
-    this.onChangeJapanese = this.onChangeJapanese.bind(this);
-    this.onClick = this.onClick.bind(this);
-  }
+export const NewWordInfoForm = ({ index }) => {
+  const dispatch = useDispatch();
 
-  onChangeEnglish(e) {
-    this.setState({
-      english: e.target.value,
-    });
-  }
+  const [english, setEnglish] = useState('');
+  const [japanese, setJapanese] = useState('');
 
-  onChangeJapanese(e) {
-    this.setState({
-      japanese: e.target.value,
-    });
-  }
-
-  onClick() {
+  const submit = () => {
     const payload = {
-      index: this.props.index,
+      index: index,
       newWord: {
-        word: this.state.english,
-        ja: this.state.japanese,
+        word: english,
+        ja: japanese,
       },
     };
-    this.props.editWord(payload);
-    this.setState({
-      english: '',
-      japanese: '',
-    });
-  }
+    dispatch(editWord(payload));
+    setEnglish('');
+    setJapanese('');
+  };
 
-  render() {
-    return (
-      <div>
-        <h1>Edit</h1>
-        <input
-          onChange={this.onChangeEnglish}
-          value={this.state.english}
-          placeholder="englsih"
-        />
-        <input
-          onChange={this.onChangeJapanese}
-          value={this.state.japanese}
-          placeholder="japanese"
-        />
-        <button onClick={this.onClick}>submit</button>
-      </div>
-    );
-  }
-}
-const mapDispatchToProps = { editWord };
-export default connect((state) => state, mapDispatchToProps)(NewWordInfoForm);
+  return (
+    <div>
+      <h1>Edit</h1>
+      <input
+        onChange={(e) => setEnglish(e.target.value)}
+        value={english}
+        placeholder="englsih"
+      />
+      <input
+        onChange={(e) => setJapanese(e.target.value)}
+        value={japanese}
+        placeholder="japanese"
+      />
+      <button onClick={submit}>submit</button>
+    </div>
+  );
+};
