@@ -15,8 +15,8 @@ export const initialState = {
       ja: 'タイヤ',
     },
     {
-      word: 'apple',
-      ja: 'りんご',
+      word: 'get',
+      ja: '手に入れる',
     },
   ],
 };

@@ -8,8 +8,6 @@ export const JapaneseToEnglishTest = () => {
   const [jaWord, setJaWord] = useState('');
   const [testInfo, setTestInfo] = useState({ correct: 0, wrong: 0 });
 
-  const [enWord, setEnWord] = useState(wordList[0].word);
-
   const getRandomInt = (min, max) => {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -26,9 +24,7 @@ export const JapaneseToEnglishTest = () => {
     setJaWord('');
   };
 
-  useEffect(() => {
-    setEnWord(wordList[showedIndex].word);
-  }, [showedIndex]);
+  useEffect(() => {}, [showedIndex]);
 
   return (
     <div>
