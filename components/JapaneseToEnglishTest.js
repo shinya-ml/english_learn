@@ -2,6 +2,9 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
+// TODO: 一度出題した単語は出ないようにする
+// TODO: トータルの出題数を選べるようにする
+
 export const JapaneseToEnglishTest = () => {
   const wordList = useSelector((state) => state.word.wordList);
   const [showedIndex, setShowedIndex] = useState(0);
