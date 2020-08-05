@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { getRandomInt } from '../util';
 
 // TODO: 一度出題した単語は出ないようにする
 // TODO: トータルの出題数を選べるようにする
@@ -10,12 +11,6 @@ export const JapaneseToEnglishTest = () => {
   const [showedIndex, setShowedIndex] = useState(0);
   const [jaWord, setJaWord] = useState('');
   const [testInfo, setTestInfo] = useState({ correct: 0, wrong: 0 });
-
-  const getRandomInt = (min, max) => {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min;
-  };
 
   const selectNextWord = () => {
     if (jaWord === wordList[showedIndex].ja) {

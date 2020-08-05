@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 
-class CreateSentence extends Component {
+class CreateSentencePage extends Component {
   render() {
     <div>
       <Header />
       <h1>Create Setence</h1>
+      <CreateSentence />
       <Footer />
     </div>;
   }
 }
-export default CreateSentence;
+export default CreateSentencePage;
