@@ -22,8 +22,6 @@ export const JapaneseToEnglishTest = () => {
     setJaWord('');
   };
 
-  useEffect(() => {}, [showedIndex]);
-
   return (
     <div>
       <h1>Test translating japanese to english</h1>
