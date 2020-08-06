@@ -5,9 +5,9 @@ import { NewWordInfoForm } from './NewWordInfoForm';
 import MaterialTable from 'material-table';
 import { addWord, editWord } from '../ducks/slice';
 import { forwardRef } from 'react';
-
+import { resetServerContext } from 'react-beautiful-dnd';
 import AddBox from '@material-ui/icons/AddBox';
-import ArrowDownward from '@material-ui/icons/ArrowDownward';
+import ArrowUpward from '@material-ui/icons/ArrowUpward';
 import Check from '@material-ui/icons/Check';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
@@ -41,12 +41,12 @@ const tableIcons = {
   )),
   ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
-  SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
+  SortArrow: forwardRef((props, ref) => <ArrowUpward {...props} ref={ref} />),
   ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 };
-
 export const WordList = () => {
+  resetServerContext();
   const wordList = useSelector((state) => state.word.wordList);
   const dispatch = useDispatch();
 
@@ -55,36 +55,31 @@ export const WordList = () => {
     { title: 'Japanese Word', field: 'ja' },
   ];
   return (
-    <div>
-      <h1>Word List</h1>
-      <MaterialTable
-        icons={tableIcons}
-        title="Word List"
-        columns={columns}
-        data={wordList}
-        editable={{
-          onRowAdd: (newData) => {
-            console.log(newData);
-            new Promise((resolve) => {
-              setTimeout(() => {
-                dispatch(addWord(newData));
-                resolve();
-              }, 600);
-            });
-          },
-          onRowUpdate: (newData, oldData) => {
-            new Promise((resolve) => {
-              setTimeout(() => {
-                resolve();
-                if (oldData) {
-                  console.log('onRowUpdate');
-                }
-              });
-            });
-          },
-        }}
-      />
-      {/* <table>
+    <MaterialTable
+      title="Word List"
+      icons={tableIcons}
+      columns={columns}
+      data={wordList}
+      editable={{
+        onRowAdd: (newData) =>
+          new Promise((resolve) => {
+            setTimeout(() => {
+              resolve();
+              console.log(newData);
+            }, 600);
+          }),
+        onRowUpdate: (newData, oldData) =>
+          new Promise((resolve) => {
+            setTimeout(() => {
+              resolve();
+              console.log(oldData);
+              console.log(newData);
+            }),
+              600;
+          }),
+      }}
+    />
+    /* <table>
         <thead>
           <tr>
             <th>English Word</th>
@@ -107,7 +102,6 @@ export const WordList = () => {
             </tr>
           ))}
         </tbody>
-      </table> */}
-    </div>
+      </table> */
   );
 };

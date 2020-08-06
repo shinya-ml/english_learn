@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { editWord } from '../ducks/slice';
 
-export const NewWordInfoForm = ({ oldWord }) => {
+export const NewWordInfoForm = ({ index }) => {
   const dispatch = useDispatch();
 
   const [english, setEnglish] = useState('');
@@ -11,7 +11,7 @@ export const NewWordInfoForm = ({ oldWord }) => {
 
   const submit = () => {
     const payload = {
-      oldWWord: oldWord,
+      index: index,
       newWord: {
         word: english,
         ja: japanese,

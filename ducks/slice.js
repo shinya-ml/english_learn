@@ -34,22 +34,16 @@ const wordSlice = createSlice({
         ...state.wordList.slice(action.payload + 1, state.wordList.length),
       ],
     }),
-    editWord: (state, action) => (
-      console.log('hoge'),
-      {
-        wordList: [
-          ...state.wordList.slice(
-            0,
-            state.wordList.indexOf(action.payload.oldWord)
-          ),
-          action.payload.newWord,
-          ...state.wordList.slice(
-            state.wordList.indexOf(action.payload.oldWord) + 1,
-            state.wordList.length
-          ),
-        ],
-      }
-    ),
+    editWord: (state, action) => ({
+      wordList: [
+        ...state.wordList.slice(0, action.payload.index),
+        action.payload.newWord,
+        ...state.wordList.slice(
+          action.payload.index + 1,
+          state.wordList.length
+        ),
+      ],
+    }),
   },
 });
 export const { addWord, deleteWord, editWord } = wordSlice.actions;
