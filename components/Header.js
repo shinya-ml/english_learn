@@ -1,10 +1,10 @@
 import React from 'react';
-import { CardHeader } from '@material-ui/core';
+import { AppBar, Typography } from '@material-ui/core';
 
 export const Header = () => {
   return (
-    <div>
-      <CardHeader title="Header" />
-    </div>
+    <AppBar position="static">
+      <Typography variant="h2">Let's Work on English Skill !!</Typography>
+    </AppBar>
   );
 };
