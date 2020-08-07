@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteWord } from '../ducks/slice';
 import { NewWordInfoForm } from './NewWordInfoForm';
+import { getIndex } from '../util';
 import MaterialTable from 'material-table';
 import { addWord, editWord } from '../ducks/slice';
 import { forwardRef } from 'react';
@@ -72,8 +73,16 @@ export const WordList = () => {
           new Promise((resolve) => {
             setTimeout(() => {
               resolve();
-              console.log(oldData);
-              console.log(newData);
+              const oldWord = {
+                word: oldData.word,
+                ja: oldData.ja,
+              };
+              const matchedIndex = getIndex(wordList, oldWord);
+              const payload = {
+                index: matchedIndex,
+                newWord: newData,
+              };
+              dispatch(editWord(payload));
             }),
               600;
           }),
