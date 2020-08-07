@@ -59,13 +59,13 @@ export const WordList = () => {
       title="Word List"
       icons={tableIcons}
       columns={columns}
-      data={wordList}
+      data={JSON.parse(JSON.stringify(wordList))}
       editable={{
         onRowAdd: (newData) =>
           new Promise((resolve) => {
             setTimeout(() => {
               resolve();
-              console.log(newData);
+              dispatch(addWord(newData));
             }, 600);
           }),
         onRowUpdate: (newData, oldData) =>
