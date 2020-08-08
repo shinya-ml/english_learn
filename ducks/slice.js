@@ -18,6 +18,22 @@ export const initialState = {
       word: 'get',
       ja: '手に入れる',
     },
+    {
+      word: 'red',
+      ja: '赤',
+    },
+    {
+      word: 'blue',
+      ja: '青',
+    },
+    {
+      word: 'yellow',
+      ja: '黄色',
+    },
+    {
+      word: 'black',
+      ja: 'くろ',
+    },
   ],
 };
 
