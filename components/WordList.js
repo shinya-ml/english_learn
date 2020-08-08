@@ -1,10 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteWord } from '../ducks/slice';
 import { NewWordInfoForm } from './NewWordInfoForm';
 import { getIndex } from '../util';
 import MaterialTable from 'material-table';
-import { addWord, editWord } from '../ducks/slice';
+import { addWord, editWord, deleteWord } from '../ducks/slice';
 import { forwardRef } from 'react';
 import { resetServerContext } from 'react-beautiful-dnd';
 import AddBox from '@material-ui/icons/AddBox';
@@ -46,6 +45,7 @@ const tableIcons = {
   ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 };
+
 export const WordList = () => {
   resetServerContext();
   const wordList = useSelector((state) => state.word.wordList);
@@ -85,6 +85,19 @@ export const WordList = () => {
               dispatch(editWord(payload));
             }),
               600;
+          }),
+        onRowDelete: (oldData) =>
+          new Promise((resolve) => {
+            setTimeout(() => {
+              resolve();
+              console.log(oldData);
+              const oldWord = {
+                word: oldData.word,
+                ja: oldData.ja,
+              };
+              const matchedIndex = getIndex(wordList, oldWord);
+              dispatch(deleteWord(matchedIndex));
+            });
           }),
       }}
     />
