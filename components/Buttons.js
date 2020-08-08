@@ -1,14 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import Link from 'next/link';
+import { Button } from '@material-ui/core';
 
 export const Buttons = () => {
-  const wordList = useSelector((state) => state.word.wordList);
   return (
     <div>
-      <button onClick={() => console.log(wordList)}>Button</button>
       <Link href="/japanese_to_english_test">
-        <button>Test: Ja to En</button>
+        <Button color="primary" variant="contained">
+          Test: Ja to En
+        </Button>
       </Link>
     </div>
   );

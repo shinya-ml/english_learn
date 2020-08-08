@@ -1,10 +1,8 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NewWordInfoForm } from './NewWordInfoForm';
 import { getIndex } from '../util';
 import MaterialTable from 'material-table';
 import { addWord, editWord, deleteWord } from '../ducks/slice';
-import { forwardRef } from 'react';
 import { resetServerContext } from 'react-beautiful-dnd';
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowUpward from '@material-ui/icons/ArrowUpward';
