@@ -9,6 +9,7 @@ import { getRandomInt } from '../util';
 
 export const JapaneseToEnglishTest = () => {
   const wordList = useSelector((state) => state.word.wordList);
+  const [restWordList, setRestWordList] = useState(wordList);
   const [showedIndex, setShowedIndex] = useState(0);
   const [jaWord, setJaWord] = useState('');
   const [testInfo, setTestInfo] = useState({ correct: 0, wrong: 0 });
@@ -17,13 +18,25 @@ export const JapaneseToEnglishTest = () => {
     if (jaWord === '') {
       //TODO: error message
     } else {
-      if (jaWord === wordList[showedIndex].ja) {
+      if (jaWord === restWordList[showedIndex].ja) {
         setTestInfo({ correct: testInfo.correct + 1, wrong: testInfo.wrong });
       } else {
         setTestInfo({ correct: testInfo.correct, wrong: testInfo.wrong + 1 });
       }
-      setShowedIndex(getRandomInt(0, wordList.length));
+      setRestWordList([
+        ...restWordList.slice(0, showedIndex),
+        ...restWordList.slice(showedIndex + 1, restWordList.length),
+      ]);
+      setShowedIndex(getRandomInt(0, restWordList.length - 1));
       setJaWord('');
+    }
+  };
+
+  const showWord = () => {
+    if (restWordList.length === 0) {
+      return 'Completed';
+    } else {
+      return restWordList[showedIndex].word;
     }
   };
 
@@ -43,7 +56,7 @@ export const JapaneseToEnglishTest = () => {
         </Grid>
         <Grid item xs={4}>
           <Card variant="outlined">
-            <Typography variant="h4">{wordList[showedIndex].word}</Typography>
+            <Typography variant="h4">{showWord()}</Typography>
           </Card>
         </Grid>
         <Grid item xs={4}>
