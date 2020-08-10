@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { TextField, Button, Card, Typography, Grid } from '@material-ui/core';
 import { getRandomInt } from '../util';
 
 // TODO: 一度出題した単語は出ないようにする
@@ -13,23 +14,54 @@ export const JapaneseToEnglishTest = () => {
   const [testInfo, setTestInfo] = useState({ correct: 0, wrong: 0 });
 
   const selectNextWord = () => {
-    if (jaWord === wordList[showedIndex].ja) {
-      setTestInfo({ correct: testInfo.correct + 1, wrong: testInfo.wrong });
+    if (jaWord === '') {
+      //TODO: error message
     } else {
-      setTestInfo({ correct: testInfo.correct, wrong: testInfo.wrong + 1 });
+      if (jaWord === wordList[showedIndex].ja) {
+        setTestInfo({ correct: testInfo.correct + 1, wrong: testInfo.wrong });
+      } else {
+        setTestInfo({ correct: testInfo.correct, wrong: testInfo.wrong + 1 });
+      }
+      setShowedIndex(getRandomInt(0, wordList.length));
+      setJaWord('');
     }
-    setShowedIndex(getRandomInt(0, wordList.length));
-    setJaWord('');
   };
 
   return (
     <div>
-      <h1>Test translating japanese to english</h1>
-      <p>correct: {testInfo.correct}</p>
-      <p>wrong: {testInfo.wrong}</p>
-      <p>{wordList[showedIndex].word}</p>
-      <input onChange={(e) => setJaWord(e.target.value)} value={jaWord} />
-      <button onClick={selectNextWord}>next word</button>
+      <Grid container spacing={4}>
+        <Grid item xs={12}>
+          <Typography variant="h2">
+            Test translating japanese to english
+          </Typography>
+        </Grid>
+        <Grid item xs={6}>
+          <Typography variant="h4">Correct: {testInfo.correct}</Typography>
+        </Grid>
+        <Grid item xs={6}>
+          <Typography variant="h4">Wrong: {testInfo.wrong}</Typography>
+        </Grid>
+        <Grid item xs={4}>
+          <Card variant="outlined">
+            <Typography variant="h4">{wordList[showedIndex].word}</Typography>
+          </Card>
+        </Grid>
+        <Grid item xs={4}>
+          <TextField
+            id="standard-basic"
+            onChange={(e) => setJaWord(e.target.value)}
+            value={jaWord}
+            placeholder="japanese word"
+          />
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={selectNextWord}
+          >
+            Answer
+          </Button>
+        </Grid>
+      </Grid>
     </div>
   );
 };

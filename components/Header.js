@@ -1,9 +1,10 @@
 import React from 'react';
+import { AppBar, Typography } from '@material-ui/core';
 
 export const Header = () => {
   return (
-    <div>
-      <h1>Header</h1>
-    </div>
+    <AppBar position="static">
+      <Typography variant="h2">Let's Work on English Skill !!</Typography>
+    </AppBar>
   );
 };
